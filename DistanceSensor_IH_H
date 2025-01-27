@@ -1,0 +1,23 @@
+#ifndef DistanceSensor_IH_H
+#define DistanceSensor_IH_H
+#include "Arduino.h"
+#include <SoftwareSerial.h>
+
+class DistanceSensor_IH{
+  public:
+    DistanceSensor_IH(byte rxPin, byte txPin);
+    void begin();
+    void checkDistance(int degree);
+    void recordDistance(int degree, float measurement);
+  private:
+    byte _rxPin;
+    byte _txPin;
+    int readings[9];
+    int recordedDistance[10];
+    int recordingIndex = 0;
+    int recordingDirection = 1;
+    const int HEADER = 0x59;
+    SoftwareSerial* _serial;
+};
+
+#endif
